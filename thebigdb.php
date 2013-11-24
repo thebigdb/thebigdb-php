@@ -2,7 +2,7 @@
 
 class TheBigDB {
 
-  public $version = "0.1.0";
+  public $version = "0.2.0";
 
   public $default_configuration = array(
     "api_key" => null,

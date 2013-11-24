@@ -1,6 +1,6 @@
 # TheBigDB PHP Wrapper
 
-A simple PHP wrapper for making requests to the API of [TheBigDB.com](http://thebigdb.com). [Full API documentation](http://developers.thebigdb.com/api).
+A simple PHP wrapper for making requests to the API of [TheBigDB.com](http://thebigdb.com). [Full API documentation](http://thebigdb.com/api).
 
 ## Simple usage
 
@@ -12,20 +12,20 @@ First, you need to initialize the class with:
 The following actions return a dict object from the parsed JSON the server answered.
 
 
-### Search \([api doc](http://developers.thebigdb.com/api#statements-search)\)
+### Search \([api doc](http://thebigdb.com/api#statements-search)\)
   
     # Usage: $thebigdb->search($nodes, $other_params = array());
-    $thebigdb->search("iPhone", array("per_page" => 1));
-    $thebigdb->search(array(array("match" => "James"), "job", "President of the United States"));
-    $thebigdb->search(array(array("match" => "Facebook"), "job", array("match" => "Executive")));
+    $thebigdb->search(array("subject" => array("match" => "James"), "property" => "job", "answer" => "President of the United States"));
+    $thebigdb->search(array("subject" => "London", "property" => "population"), array("period" => array("on" => "2007-06-05")));
+    $thebigdb->search("iPhone"); # will fulltext search "iPhone" in all fields
 
-### Create \([api doc](http://developers.thebigdb.com/api#statements-create)\)
+### Create \([api doc](http://thebigdb.com/api#statements-create)\)
     
     # Usage: $thebigdb->create($nodes, $other_params = array());
-    $thebigdb->create(array("iPhone 5", "weight", "112 grams"));
-    $thebigdb->create(array("Bill Clinton", "job", "President of the United States"), array("period" => array("from" => "1993-01-20 12:00:00", "to" => "2001-01-20 12:00:00")))
+    $thebigdb->create(array("subject" => "iPhone 5", "property" => "weight", "answer" => "112 grams"));
+    $thebigdb->create(array("subject" => "Bill Clinton", "property" => "job", "answer" => "President of the United States"), array("period" => array("from" => "1993-01-20 12:00:00", "to" => "2001-01-20 12:00:00")))
 
-### Show \([api doc](http://developers.thebigdb.com/api#statements-show)\), Upvote \([api doc](http://developers.thebigdb.com/api#statements-upvote)\) and Downvote \([api doc](http://developers.thebigdb.com/api#statements-downvote)\)
+### Show \([api doc](http://thebigdb.com/api#statements-show)\), Upvote \([api doc](http://thebigdb.com/api#statements-upvote)\) and Downvote \([api doc](http://thebigdb.com/api#statements-downvote)\)
 
     $thebigdb->show("id-of-the-sentence");
 
@@ -40,7 +40,7 @@ Each action returns an object translating the JSON answered by the server.
 Example:
     
     # Will print the id of the first statement matching that search
-    $response = $thebigdb->search(array(array("match" => "James"), "job", "President of the United States"));
+    $response = $thebigdb->search(array("subject" => array("match" => "James"), "property" => "job", "answer" => "President of the United States"));
     var_dump($response->statements[0]->id);
 
 ## Other Features
